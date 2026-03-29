@@ -32,13 +32,18 @@ Build a decentralized banking system where users can:
 - Bank contract: `0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512`
 - All 7 contract tests passing
 - Hardhat Node running at `http://127.0.0.1:8545`
+- Backend API implemented (Go + Gin + PostgreSQL)
+  - Auth endpoints (nonce, login)
+  - Account endpoint (balance)
+  - Transaction endpoint (paginated history)
+  - Event listener (blockchain sync)
 
 ### 🔄 In Progress
-- Frontend implementation
+- Frontend implementation (Vue 3 + Vite)
 
 ### ⏳ Pending
-- Backend implementation (user will code with assistance)
 - Frontend-backend integration
+- End-to-end testing
 
 ---
 
@@ -46,7 +51,7 @@ Build a decentralized banking system where users can:
 
 ```
 Web3-Banking/
-├── Backend/                    # Go + Gin + PostgreSQL (user implements)
+├── Backend/                    # ✅ Complete (Go + Gin + PostgreSQL)
 │   ├── cmd/api/main.go
 │   ├── config/
 │   ├── internal/
@@ -69,12 +74,12 @@ Web3-Banking/
 │
 └── Frontend/                   # Vue 3 + Vite (in progress)
     ├── src/
-    │   ├── api/
-    │   ├── components/
-    │   ├── composables/
-    │   ├── pages/
-    │   ├── store/
-    │   └── types/
+    │   ├── api/              # Axios client, endpoints
+    │   ├── components/        # Reusable UI components
+    │   ├── composables/      # Vue composables (useWeb3, useAuth, useContract)
+    │   ├── pages/            # Route pages (Login, Dashboard)
+    │   ├── store/            # Pinia stores (auth, wallet)
+    │   └── types/            # TypeScript interfaces
     ├── vite.config.ts
     └── package.json
 ```
@@ -91,9 +96,9 @@ Web3-Banking/
 - [x] Deploy to Hardhat Node
 
 ### Phase 2: Frontend
-- [ ] Initialize Vue 3 + Vite project
-- [ ] Install dependencies: viem, web3modal, pinia, vue-router
-- [ ] Setup web3 connection (web3modal + viem)
+- [ ] Initialize Vue 3 + Vite project with TailwindCSS
+- [ ] Setup viem + web3modal for wallet connection
+- [ ] Add Pinia stores for auth and wallet state
 - [ ] Create Login page (wallet connect + signature)
 - [ ] Create Dashboard page
   - Display balance
@@ -101,22 +106,34 @@ Web3-Banking/
   - Withdraw form
   - Transfer form
 - [ ] Add transaction history with pagination
-- [ ] Connect to Hardhat Node
+- [ ] Connect to Go backend API
 
-### Phase 3: Backend (User Implements)
-- [ ] Setup Go project with Gin
-- [ ] Setup PostgreSQL connection
-- [ ] Create migrations
-- [ ] Implement repositories
-- [ ] Implement usecases
-- [ ] Implement HTTP handlers
-- [ ] Implement event listener (sync Deposit/Withdrawal/Transfer events to DB)
-- [ ] Endpoints:
-  - `POST /api/auth/nonce` - Get nonce for wallet
-  - `POST /api/auth/login` - Verify signature
-  - `GET /api/account/:address` - Get balance
-  - `GET /api/transactions?page=1&limit=20` - Paginated history
-  - `GET /api/contract/info` - Token info
+### Frontend Stack
+| Package | Purpose |
+|---------|---------|
+| Vue 3 + Vite | Framework & build |
+| TypeScript | Type safety |
+| Pinia | State management |
+| Vue Router | Navigation |
+| viem | Blockchain interaction |
+| web3modal | Wallet connection |
+| Axios | HTTP client |
+| TailwindCSS | Styling |
+
+### Phase 3: Backend (✅ COMPLETE)
+- [x] Setup Go project with Gin
+- [x] Setup PostgreSQL connection
+- [x] Create migrations
+- [x] Implement repositories
+- [x] Implement usecases
+- [x] Implement HTTP handlers
+- [x] Implement event listener (sync Deposit/Withdrawal/Transfer events to DB)
+- [x] Endpoints:
+  - `POST /api/v1/auth/nonce` - Get nonce for wallet
+  - `POST /api/v1/auth/login` - Verify signature
+  - `GET /api/v1/account/:address` - Get balance
+  - `GET /api/v1/transactions?page=1&limit=20` - Paginated history
+  - `GET /api/v1/contract/info` - Token info
 
 ### Phase 4: Integration
 - [ ] Connect frontend to backend
@@ -221,13 +238,14 @@ npx hardhat compile           # Compile contracts
 npx hardhat test              # Run tests
 npx hardhat run scripts/deploy.ts --network hardhat  # Deploy
 
-# Frontend (to be created)
+# Frontend
 cd Frontend
 npm install
 npm run dev
 
-# Backend (to be created by user)
+# Backend
 cd Backend
-go mod init
+cp .env.example .env
+go mod download
 go run cmd/api/main.go
 ```
