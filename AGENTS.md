@@ -166,6 +166,39 @@ Located in:
 
 ---
 
+## Auto-Commit Skill
+
+**CRITICAL**: After completing ANY feature, change, fix, or code modification, the agent MUST:
+
+1. **Detect changes** → `git status`
+2. **Create feature branch** → `git checkout -b <type>/<name>`
+3. **Stage files** (atomic - only related files)
+4. **Commit** → `git commit -m "<type>(<scope>): <description>"`
+5. **Push** → `git push -u origin <branch-name>`
+6. **Create PR** → `gh pr create`
+7. **Merge** → `gh pr merge --squash --delete-branch`
+
+### Branch & Commit Format
+| Scenario | Branch | Commit |
+|----------|--------|--------|
+| New feature | `feat/<name>` | `feat(contracts): add feature` |
+| Bug fix | `fix/<name>` | `fix(frontend): resolve bug` |
+| Test | `test/<name>` | `test(contracts): add tests` |
+| Config | `chore/<name>` | `chore(config): update settings` |
+
+### Skill Files
+- `.skills/auto-commit.md` - Main workflow
+- `.skills/commit-types.md` - Commit type reference
+- `.skills/conventions.md` - Project conventions
+
+**Rules**:
+- Always commit (no override)
+- One logical change per commit
+- Push after every commit
+- Squash merge to main
+
+---
+
 ## Notes for Future Agent
 
 - Hardhat Node must be running before deploying contracts or testing: `npx hardhat node`
@@ -173,6 +206,7 @@ Located in:
 - Backend user implements themselves - agent only assists
 - All blockchain operations are on-chain (no off-chain ledger)
 - Transaction history pagination uses DB indexing, not direct contract queries
+- **ALWAYS use auto-commit skill after every feature**
 
 ---
 
