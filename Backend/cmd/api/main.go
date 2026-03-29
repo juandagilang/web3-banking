@@ -22,7 +22,7 @@ import (
 	"github.com/juandagilang/web3bank-backend/internal/repository/user"
 	"github.com/juandagilang/web3bank-backend/internal/usecase/account"
 	"github.com/juandagilang/web3bank-backend/internal/usecase/auth"
-	"github.com/juandagilang/web3bank-backend/internal/usecase/transaction/usecasetx"
+	"github.com/juandagilang/web3bank-backend/internal/usecase/transaction"
 )
 
 func main() {
@@ -65,7 +65,7 @@ func main() {
 
 	authUC := auth.NewUseCase(userRepo, cfg.JWTSecret, cfg.JWTExpiryHours)
 	accountUC := account.NewUseCase(blockchainClient, cfg.BankAddress)
-	txUC := usecasetx.NewUseCase(txRepo)
+	txUC := transaction.NewUseCase(txRepo)
 
 	authHandler := handler.NewAuthHandler(authUC)
 	accountHandler := handler.NewAccountHandler(accountUC)
