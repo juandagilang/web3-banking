@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+artifacts/
+cache/
+dist/
+
+# Environment (keep .env.example if needed)
+.env
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# TypeChain
+typechain-types/
+
+# Coverage
+coverage/
+coverage.json
+
+# Hardhat
+typechain-types/
