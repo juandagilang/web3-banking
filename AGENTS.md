@@ -37,13 +37,18 @@ Build a decentralized banking system where users can:
   - Account endpoint (balance)
   - Transaction endpoint (paginated history)
   - Event listener (blockchain sync)
+- Frontend implemented (Vue 3 + Vite)
+  - Wallet connection (web3modal + viem)
+  - Login page with signature auth
+  - Dashboard with balance cards
+  - Transaction forms (deposit/withdraw/transfer)
+  - Paginated transaction history
 
 ### 🔄 In Progress
-- Frontend implementation (Vue 3 + Vite)
+- End-to-end testing
 
 ### ⏳ Pending
-- Frontend-backend integration
-- End-to-end testing
+- None
 
 ---
 
@@ -72,7 +77,7 @@ Web3-Banking/
 │   ├── hardhat.config.ts
 │   └── package.json
 │
-└── Frontend/                   # Vue 3 + Vite (in progress)
+└── Frontend/                   # ✅ Complete (Vue 3 + Vite)
     ├── src/
     │   ├── api/              # Axios client, endpoints
     │   ├── components/        # Reusable UI components
@@ -95,18 +100,18 @@ Web3-Banking/
 - [x] Write and run tests
 - [x] Deploy to Hardhat Node
 
-### Phase 2: Frontend
-- [ ] Initialize Vue 3 + Vite project with TailwindCSS
-- [ ] Setup viem + web3modal for wallet connection
-- [ ] Add Pinia stores for auth and wallet state
-- [ ] Create Login page (wallet connect + signature)
-- [ ] Create Dashboard page
+### Phase 2: Frontend (✅ COMPLETE)
+- [x] Initialize Vue 3 + Vite project with TailwindCSS
+- [x] Setup viem + web3modal for wallet connection
+- [x] Add Pinia stores for auth and wallet state
+- [x] Create Login page (wallet connect + signature)
+- [x] Create Dashboard page
   - Display balance
   - Deposit form
   - Withdraw form
   - Transfer form
-- [ ] Add transaction history with pagination
-- [ ] Connect to Go backend API
+- [x] Add transaction history with pagination
+- [x] Connect to Go backend API
 
 ### Frontend Stack
 | Package | Purpose |
@@ -135,8 +140,8 @@ Web3-Banking/
   - `GET /api/v1/transactions?page=1&limit=20` - Paginated history
   - `GET /api/v1/contract/info` - Token info
 
-### Phase 4: Integration
-- [ ] Connect frontend to backend
+### Phase 4: Integration (🔄 IN PROGRESS)
+- [x] Connect frontend to backend
 - [ ] Test full flow
 - [ ] Fix bugs
 
