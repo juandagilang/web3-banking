@@ -6,6 +6,7 @@ import { useAccount } from '@wagmi/vue'
 import { wagmiConfig } from '@/composables/useWeb3'
 import WalletConnect from '@/components/WalletConnect.vue'
 import BalanceCard from '@/components/BalanceCard.vue'
+import TransactionForm from '@/components/TransactionForm.vue'
 
 const router = useRouter()
 const authStore = useAuthStore()
@@ -52,6 +53,7 @@ const handleLogout = () => {
 
       <div v-if="address" class="space-y-6">
         <BalanceCard :address="address" />
+        <TransactionForm :address="address" />
       </div>
 
       <div v-else class="text-center py-12">
